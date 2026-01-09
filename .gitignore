@@ -1,19 +1,55 @@
-# macOS
+# Dependencies
+node_modules/
+package-lock.json
+
+# MacOS
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# Node
-node_modules/
-npm-debug.log*
-
-# Editor
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
+# Logs
+*.log
+npm-debug.log*
+
 # Temporary files
 *.tmp
-*.temp
+.cache/
+
+# Personal config files
+.claude-code-token.log
+.claude/
+.config/
+.ssh/
+.npm/
+
+# System files
+.CFUserTextEncoding
+.bash_profile
+.bashrc
+.login
+.profile
+.profilebackups/
+.zprofile
+.zsh_history
+.zsh_sessions/
+.zshrc
+.cups/
+.ebay-claude-code.txt
+
+# User directories (non-project files)
+Applications/
+Desktop/
+Documents/
+Downloads/
+Library/
+Movies/
+Music/
+Pictures/
+Public/
