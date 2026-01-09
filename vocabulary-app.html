@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>儿童背单词 - KET & PET</title>
+    <link rel="stylesheet" href="vocabulary-style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 快乐背单词</h1>
+            <div class="level-selector">
+                <button class="level-btn active" data-level="KET">KET词库</button>
+                <button class="level-btn" data-level="PET">PET词库</button>
+                <button class="reset-btn" id="reset-btn">🔄 重置进度</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">已学</span>
+                    <span class="stat-value" id="learned-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">总词数</span>
+                    <span class="stat-value" id="total-count">0</span>
+                </div>
+                <div class="stat-item coin-item">
+                    <span class="stat-label">金币</span>
+                    <span class="stat-value coin-value" id="coin-count">0</span>
+                    <div class="coin-icon"></div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>学习进度</span>
+                    <span id="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="card-container">
+                <div class="word-card" id="word-card">
+                    <div class="card-front">
+                        <h2 class="word" id="word"></h2>
+                        <button class="play-btn" id="play-btn">🔊 发音</button>
+                        <p class="phonetic" id="phonetic"></p>
+                        <button class="show-btn" id="show-btn">显示中文</button>
+                    </div>
+                    <div class="card-back hidden" id="card-back">
+                        <p class="translation" id="translation"></p>
+                        <p class="example" id="example"></p>
+                        <div class="action-buttons">
+                            <button class="btn btn-forgot" id="forgot-btn">😢 不认识</button>
+                            <button class="btn btn-know" id="know-btn">✅ 认识</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn" id="prev-btn">⬅️ 上一个</button>
+                <button class="control-btn" id="next-btn">下一个 ➡️</button>
+            </div>
+
+            <div class="mode-selector">
+                <button class="mode-btn active" id="learn-mode">学习模式</button>
+                <button class="mode-btn" id="test-mode">测试模式</button>
+                <button class="mode-btn" id="review-mode">
+                    错题本 <span class="badge" id="wrong-count-badge">0</span>
+                </button>
+            </div>
+
+            <div class="test-container hidden" id="test-container">
+                <div class="test-word">
+                    <h2 id="test-word-display"></h2>
+                    <button class="play-btn" id="test-play-btn">🔊 听发音</button>
+                </div>
+                <div class="letter-blanks" id="letter-blanks"></div>
+                <div class="spelling-input">
+                    <button class="submit-btn" id="submit-btn">✅ 提交答案</button>
+                </div>
+                <div class="input-hint">💡 直接用键盘输入字母，按退格键删除</div>
+                <div class="test-result hidden" id="test-result"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>加油学习！💪</p>
+        </footer>
+    </div>
+
+    <!-- 金币奖励弹窗 -->
+    <div class="coin-popup hidden" id="coin-popup">
+        <div class="coin-animation">
+            <div class="coin-large"></div>
+        </div>
+        <div class="coin-text" id="coin-text">+1 金币</div>
+    </div>
+
+    <script src="vocabulary-app.js"></script>
+</body>
+</html>
