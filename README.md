@@ -20,9 +20,13 @@
 
 ### 本地使用
 
+**🌐 在线访问**: [https://hg845nx4q7-arch.github.io/vocabulary-app/vocabulary-app.html](https://hg845nx4q7-arch.github.io/vocabulary-app/vocabulary-app.html)
+
+或者本地使用：
+
 ```bash
 # 克隆仓库
-git clone https://github.com/YOUR_USERNAME/vocabulary-app.git
+git clone https://github.com/hg845nx4q7-arch/vocabulary-app.git
 
 # 进入目录
 cd vocabulary-app
