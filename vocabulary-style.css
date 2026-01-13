@@ -455,51 +455,11 @@ h1 {
 }
 
 .mobile-input {
-    width: 100%;
-    padding: 15px;
-    font-size: 20px;
-    text-align: center;
-    border: 2px solid #667eea;
-    border-radius: 12px;
-    background: rgba(102, 126, 234, 0.05);
-    color: #764ba2;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-}
-
-.mobile-input:focus {
-    outline: none;
-    border-color: #764ba2;
-    background: rgba(118, 75, 162, 0.1);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-}
-
-/* 桌面端隐藏输入框 */
-@media (min-width: 768px) {
-    .mobile-input {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-        left: -9999px;
-    }
-
-    .input-hint {
-        display: block;
-    }
-}
-
-/* 移动端显示输入框，隐藏提示 */
-@media (max-width: 767px) {
-    .input-hint {
-        display: none;
-    }
-
-    .letter-blanks {
-        margin: 20px 0 15px 0;
-        pointer-events: none;
-    }
+    position: absolute;
+    opacity: 0;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
 }
 
 .input-hint {
@@ -648,11 +608,6 @@ footer {
         flex-wrap: wrap;
     }
 
-    .mobile-input {
-        font-size: 18px;
-        padding: 12px;
-    }
-
     .letter-blank {
         width: 40px;
         height: 50px;
@@ -666,8 +621,7 @@ footer {
     }
 
     .spelling-input {
-        flex-direction: column;
-        gap: 10px;
+        justify-content: center;
     }
 
     .stat-item {
