@@ -2,7 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
     <title>儿童背单词 - KET & PET</title>
     <link rel="stylesheet" href="vocabulary-style.css">
 </head>
@@ -83,9 +86,10 @@
                 </div>
                 <div class="letter-blanks" id="letter-blanks"></div>
                 <div class="spelling-input">
+                    <input type="text" class="mobile-input" id="mobile-input" autocomplete="off" autocapitalize="off" spellcheck="false">
                     <button class="submit-btn" id="submit-btn">✅ 提交答案</button>
                 </div>
-                <div class="input-hint">💡 直接用键盘输入字母，按退格键删除</div>
+                <div class="input-hint">💡 点击字母框开始输入</div>
                 <div class="test-result hidden" id="test-result"></div>
             </div>
         </main>

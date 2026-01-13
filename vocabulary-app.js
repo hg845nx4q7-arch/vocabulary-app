@@ -679,6 +679,7 @@ const coinCountEl = document.getElementById('coin-count');
 const coinPopup = document.getElementById('coin-popup');
 const coinText = document.getElementById('coin-text');
 const letterBlanks = document.getElementById('letter-blanks');
+const mobileInput = document.getElementById('mobile-input');
 
 // 初始化
 function init() {
@@ -718,8 +719,33 @@ function setupEventListeners() {
 
     submitBtn.addEventListener('click', checkSpelling);
 
-    // 监听键盘输入
+    // 监听键盘输入（桌面）
     document.addEventListener('keydown', handleKeyboardInput);
+
+    // 监听移动设备输入框
+    mobileInput.addEventListener('input', handleMobileInput);
+
+    // 监听回车键（移动设备）
+    mobileInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            checkSpelling();
+        }
+    });
+
+    // 点击字母框区域时聚焦输入框
+    letterBlanks.addEventListener('click', () => {
+        if (isTestMode && !submitBtn.disabled) {
+            mobileInput.focus();
+        }
+    });
+
+    // 点击测试容器时聚焦输入框（移动设备）
+    testContainer.addEventListener('click', (e) => {
+        if (isTestMode && !submitBtn.disabled && e.target !== submitBtn) {
+            mobileInput.focus();
+        }
+    });
 }
 
 // 显示单词
@@ -810,18 +836,24 @@ function saveProgress() {
     const existingProgress = localStorage.getItem('vocabularyProgress');
     let progress = existingProgress ? JSON.parse(existingProgress) : {};
 
-    // 确保 learnedWordsByLevel 对象存在
+    // 确保各个对象存在
     if (!progress.learnedWordsByLevel) {
         progress.learnedWordsByLevel = {};
     }
+    if (!progress.wrongCountByLevel) {
+        progress.wrongCountByLevel = {};
+    }
+    if (!progress.wrongWordsListByLevel) {
+        progress.wrongWordsListByLevel = {};
+    }
 
-    // 保存当前词库的已学习单词
+    // 保存当前词库的数据
     progress.learnedWordsByLevel[currentLevel] = Array.from(learnedWords);
+    progress.wrongCountByLevel[currentLevel] = wrongCount;
+    progress.wrongWordsListByLevel[currentLevel] = Array.from(wrongWordsList);
 
-    // 保存其他数据
+    // 保存其他全局数据
     progress.currentLevel = currentLevel;
-    progress.wrongCount = wrongCount;
-    progress.wrongWordsList = Array.from(wrongWordsList);
     progress.coins = coins;
     progress.streak = streak;
 
@@ -846,8 +878,25 @@ function loadProgress() {
                 learnedWords = new Set();
             }
 
-            wrongCount = progress.wrongCount || {};
-            wrongWordsList = new Set(progress.wrongWordsList || []);
+            // 加载当前词库的错题本数据
+            if (progress.wrongCountByLevel && progress.wrongCountByLevel[currentLevel]) {
+                wrongCount = progress.wrongCountByLevel[currentLevel];
+            } else if (progress.wrongCount) {
+                // 兼容旧版本数据格式
+                wrongCount = progress.wrongCount || {};
+            } else {
+                wrongCount = {};
+            }
+
+            if (progress.wrongWordsListByLevel && progress.wrongWordsListByLevel[currentLevel]) {
+                wrongWordsList = new Set(progress.wrongWordsListByLevel[currentLevel]);
+            } else if (progress.wrongWordsList) {
+                // 兼容旧版本数据格式
+                wrongWordsList = new Set(progress.wrongWordsList || []);
+            } else {
+                wrongWordsList = new Set();
+            }
+
             coins = progress.coins || 0;
             streak = progress.streak || 0;
 
@@ -924,21 +973,40 @@ function switchLevel(level) {
     currentWords = level === 'KET' ? [...KET_WORDS] : [...PET_WORDS];
     currentIndex = 0;
 
-    // 加载新词库的已学习单词
+    // 加载新词库的数据
     const savedProgress = localStorage.getItem('vocabularyProgress');
     if (savedProgress) {
         try {
             const progress = JSON.parse(savedProgress);
+
+            // 加载已学习单词
             if (progress.learnedWordsByLevel && progress.learnedWordsByLevel[level]) {
                 learnedWords = new Set(progress.learnedWordsByLevel[level]);
             } else {
                 learnedWords = new Set();
             }
+
+            // 加载错题本数据
+            if (progress.wrongCountByLevel && progress.wrongCountByLevel[level]) {
+                wrongCount = progress.wrongCountByLevel[level];
+            } else {
+                wrongCount = {};
+            }
+
+            if (progress.wrongWordsListByLevel && progress.wrongWordsListByLevel[level]) {
+                wrongWordsList = new Set(progress.wrongWordsListByLevel[level]);
+            } else {
+                wrongWordsList = new Set();
+            }
         } catch (e) {
             learnedWords = new Set();
+            wrongCount = {};
+            wrongWordsList = new Set();
         }
     } else {
         learnedWords = new Set();
+        wrongCount = {};
+        wrongWordsList = new Set();
     }
 
     levelBtns.forEach(btn => {
@@ -1052,6 +1120,15 @@ function showTest() {
 
     // 生成字母横线
     createLetterBlanks(currentWord.word);
+
+    // 清空并聚焦输入框（支持移动设备）
+    mobileInput.value = '';
+    mobileInput.disabled = false;
+
+    // iOS 设备需要用户交互触发，延迟聚焦
+    setTimeout(() => {
+        mobileInput.focus();
+    }, 300);
 }
 
 // 创建字母横线
@@ -1116,6 +1193,48 @@ function handleKeyboardInput(e) {
         e.preventDefault();
         checkSpelling();
     }
+}
+
+// 处理移动设备输入
+function handleMobileInput(e) {
+    // 只在测试模式且未禁用时处理
+    if (!isTestMode || submitBtn.disabled) {
+        return;
+    }
+
+    const currentWord = currentWords[currentIndex];
+    const inputValue = mobileInput.value.toLowerCase().replace(/[^a-z\s]/g, '');
+
+    // 只保留字母和必要的空格
+    let filteredInput = '';
+    let inputIndex = 0;
+
+    for (let i = 0; i < currentWord.word.length && inputIndex < inputValue.length; i++) {
+        if (currentWord.word[i] === ' ') {
+            filteredInput += ' ';
+        } else {
+            // 跳过输入中多余的空格
+            while (inputIndex < inputValue.length && inputValue[inputIndex] === ' ') {
+                inputIndex++;
+            }
+            if (inputIndex < inputValue.length) {
+                filteredInput += inputValue[inputIndex];
+                inputIndex++;
+            }
+        }
+    }
+
+    userAnswer = filteredInput;
+
+    // 更新输入框显示（保持光标位置）
+    const cursorPosition = mobileInput.selectionStart;
+    mobileInput.value = filteredInput;
+
+    // 恢复光标位置
+    const newPosition = Math.min(cursorPosition, filteredInput.length);
+    mobileInput.setSelectionRange(newPosition, newPosition);
+
+    updateLetterBlanks();
 }
 
 // 更新字母横线显示
