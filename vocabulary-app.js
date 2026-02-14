@@ -1125,6 +1125,7 @@ function markAsKnown() {
 // 上一个单词
 function showPreviousWord() {
     currentIndex = currentIndex > 0 ? currentIndex - 1 : currentWords.length - 1;
+    saveProgress();
     if (isTestMode) {
         showTest();
     } else {
@@ -1135,6 +1136,7 @@ function showPreviousWord() {
 // 下一个单词
 function showNextWord() {
     currentIndex = (currentIndex + 1) % currentWords.length;
+    saveProgress();
     if (isTestMode) {
         showTest();
     } else {
@@ -1180,11 +1182,15 @@ function saveProgress() {
     if (!progress.wrongWordsListByLevel) {
         progress.wrongWordsListByLevel = {};
     }
+    if (!progress.currentIndexByLevel) {
+        progress.currentIndexByLevel = {};
+    }
 
     // 保存当前词库的数据
     progress.learnedWordsByLevel[currentLevel] = Array.from(learnedWords);
     progress.wrongCountByLevel[currentLevel] = wrongCount;
     progress.wrongWordsListByLevel[currentLevel] = Array.from(wrongWordsList);
+    progress.currentIndexByLevel[currentLevel] = currentIndex;
 
     // 保存其他全局数据
     progress.currentLevel = currentLevel;
@@ -1234,6 +1240,13 @@ function loadProgress() {
             coins = progress.coins || 0;
             streak = progress.streak || 0;
 
+            // 加载当前词库的学习位置
+            if (progress.currentIndexByLevel && progress.currentIndexByLevel[currentLevel] !== undefined) {
+                currentIndex = progress.currentIndexByLevel[currentLevel];
+            } else {
+                currentIndex = 0;
+            }
+
             // 更新词库
             currentWords = currentLevel === 'KET' ? [...KET_WORDS] : [...PET_WORDS];
 
@@ -1256,7 +1269,13 @@ function resetProgress() {
         wrongWordsList.clear();
         coins = 0;
         streak = 0;
+        currentIndex = 0;
         updateStats();
+        if (isTestMode) {
+            showTest();
+        } else {
+            showWord();
+        }
         alert('进度已重置！');
     }
 }
@@ -1305,7 +1324,6 @@ function switchLevel(level) {
 
     currentLevel = level;
     currentWords = level === 'KET' ? [...KET_WORDS] : [...PET_WORDS];
-    currentIndex = 0;
 
     // 加载新词库的数据
     const savedProgress = localStorage.getItem('vocabularyProgress');
@@ -1331,6 +1349,13 @@ function switchLevel(level) {
                 wrongWordsList = new Set(progress.wrongWordsListByLevel[level]);
             } else {
                 wrongWordsList = new Set();
+            }
+
+            // 加载学习位置
+            if (progress.currentIndexByLevel && progress.currentIndexByLevel[level] !== undefined) {
+                currentIndex = progress.currentIndexByLevel[level];
+            } else {
+                currentIndex = 0;
             }
         } catch (e) {
             learnedWords = new Set();
