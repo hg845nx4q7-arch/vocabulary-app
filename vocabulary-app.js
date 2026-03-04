@@ -1,3 +1,474 @@
+// 剑一词库 - 剑桥少儿英语一级 (Starters)
+const STARTERS_WORDS = [
+    // 动物
+    { word: "cat", phonetic: "/kæt/", translation: "猫", example: "I have a cat." },
+    { word: "dog", phonetic: "/dɔːɡ/", translation: "狗", example: "My dog is big." },
+    { word: "bird", phonetic: "/bɜːrd/", translation: "鸟", example: "The bird can fly." },
+    { word: "fish", phonetic: "/fɪʃ/", translation: "鱼", example: "Fish live in water." },
+    { word: "horse", phonetic: "/hɔːrs/", translation: "马", example: "The horse runs fast." },
+    { word: "sheep", phonetic: "/ʃiːp/", translation: "羊", example: "Sheep eat grass." },
+    { word: "duck", phonetic: "/dʌk/", translation: "鸭子", example: "The duck swims." },
+    { word: "cow", phonetic: "/kaʊ/", translation: "牛", example: "The cow gives milk." },
+    { word: "chicken", phonetic: "/ˈtʃɪkɪn/", translation: "鸡", example: "The chicken lays eggs." },
+    { word: "pig", phonetic: "/pɪɡ/", translation: "猪", example: "The pig is pink." },
+    { word: "mouse", phonetic: "/maʊs/", translation: "老鼠", example: "A mouse is small." },
+    { word: "frog", phonetic: "/frɔːɡ/", translation: "青蛙", example: "The frog jumps high." },
+    { word: "spider", phonetic: "/ˈspaɪdər/", translation: "蜘蛛", example: "A spider has eight legs." },
+    { word: "snake", phonetic: "/sneɪk/", translation: "蛇", example: "The snake is long." },
+    { word: "turtle", phonetic: "/ˈtɜːrtl/", translation: "乌龟", example: "The turtle moves slowly." },
+    { word: "elephant", phonetic: "/ˈelɪfənt/", translation: "大象", example: "An elephant is big." },
+    { word: "monkey", phonetic: "/ˈmʌŋki/", translation: "猴子", example: "The monkey eats bananas." },
+    { word: "lion", phonetic: "/ˈlaɪən/", translation: "狮子", example: "The lion is strong." },
+    { word: "tiger", phonetic: "/ˈtaɪɡər/", translation: "老虎", example: "The tiger is orange." },
+    { word: "bear", phonetic: "/ber/", translation: "熊", example: "The bear is brown." },
+    { word: "rabbit", phonetic: "/ˈræbɪt/", translation: "兔子", example: "The rabbit has long ears." },
+
+    // 身体部位
+    { word: "eye", phonetic: "/aɪ/", translation: "眼睛", example: "I have two eyes." },
+    { word: "ear", phonetic: "/ɪr/", translation: "耳朵", example: "I hear with my ears." },
+    { word: "nose", phonetic: "/nəʊz/", translation: "鼻子", example: "My nose is small." },
+    { word: "mouth", phonetic: "/maʊθ/", translation: "嘴", example: "Open your mouth." },
+    { word: "hand", phonetic: "/hænd/", translation: "手", example: "I have two hands." },
+    { word: "leg", phonetic: "/leɡ/", translation: "腿", example: "My leg hurts." },
+    { word: "foot", phonetic: "/fʊt/", translation: "脚", example: "I have two feet." },
+    { word: "arm", phonetic: "/ɑːrm/", translation: "手臂", example: "My arm is strong." },
+    { word: "head", phonetic: "/hed/", translation: "头", example: "My head is big." },
+    { word: "hair", phonetic: "/her/", translation: "头发", example: "My hair is long." },
+    { word: "face", phonetic: "/feɪs/", translation: "脸", example: "Wash your face." },
+    { word: "neck", phonetic: "/nek/", translation: "脖子", example: "My neck is long." },
+
+    // 颜色
+    { word: "red", phonetic: "/red/", translation: "红色", example: "The apple is red." },
+    { word: "blue", phonetic: "/bluː/", translation: "蓝色", example: "The sky is blue." },
+    { word: "green", phonetic: "/ɡriːn/", translation: "绿色", example: "The grass is green." },
+    { word: "yellow", phonetic: "/ˈjeloʊ/", translation: "黄色", example: "The sun is yellow." },
+    { word: "black", phonetic: "/blæk/", translation: "黑色", example: "My shoes are black." },
+    { word: "white", phonetic: "/waɪt/", translation: "白色", example: "Snow is white." },
+    { word: "pink", phonetic: "/pɪŋk/", translation: "粉色", example: "I like pink." },
+    { word: "orange", phonetic: "/ˈɔːrɪndʒ/", translation: "橙色", example: "The orange is orange." },
+    { word: "purple", phonetic: "/ˈpɜːrpl/", translation: "紫色", example: "The flower is purple." },
+    { word: "brown", phonetic: "/braʊn/", translation: "棕色", example: "The bear is brown." },
+    { word: "grey", phonetic: "/ɡreɪ/", translation: "灰色", example: "The elephant is grey." },
+
+    // 数字
+    { word: "one", phonetic: "/wʌn/", translation: "一", example: "I have one nose." },
+    { word: "two", phonetic: "/tuː/", translation: "二", example: "I have two eyes." },
+    { word: "three", phonetic: "/θriː/", translation: "三", example: "I see three cats." },
+    { word: "four", phonetic: "/fɔːr/", translation: "四", example: "I have four apples." },
+    { word: "five", phonetic: "/faɪv/", translation: "五", example: "I have five fingers." },
+    { word: "six", phonetic: "/sɪks/", translation: "六", example: "Six birds are flying." },
+    { word: "seven", phonetic: "/ˈsevn/", translation: "七", example: "There are seven days." },
+    { word: "eight", phonetic: "/eɪt/", translation: "八", example: "I am eight years old." },
+    { word: "nine", phonetic: "/naɪn/", translation: "九", example: "I see nine stars." },
+    { word: "ten", phonetic: "/ten/", translation: "十", example: "I have ten toes." },
+
+    // 家庭
+    { word: "mother", phonetic: "/ˈmʌðər/", translation: "妈妈", example: "My mother is kind." },
+    { word: "father", phonetic: "/ˈfɑːðər/", translation: "爸爸", example: "My father is tall." },
+    { word: "sister", phonetic: "/ˈsɪstər/", translation: "姐妹", example: "My sister is cute." },
+    { word: "brother", phonetic: "/ˈbrʌðər/", translation: "兄弟", example: "My brother is young." },
+    { word: "family", phonetic: "/ˈfæməli/", translation: "家庭", example: "I love my family." },
+    { word: "grandma", phonetic: "/ˈɡrænmɑː/", translation: "奶奶", example: "Grandma is old." },
+    { word: "grandpa", phonetic: "/ˈɡrænpɑː/", translation: "爷爷", example: "Grandpa reads books." },
+    { word: "friend", phonetic: "/frend/", translation: "朋友", example: "She is my friend." },
+
+    // 食物
+    { word: "apple", phonetic: "/ˈæpl/", translation: "苹果", example: "I eat an apple." },
+    { word: "banana", phonetic: "/bəˈnænə/", translation: "香蕉", example: "The banana is yellow." },
+    { word: "cake", phonetic: "/keɪk/", translation: "蛋糕", example: "I like cake." },
+    { word: "bread", phonetic: "/bred/", translation: "面包", example: "I eat bread." },
+    { word: "egg", phonetic: "/eɡ/", translation: "鸡蛋", example: "I have an egg." },
+    { word: "milk", phonetic: "/mɪlk/", translation: "牛奶", example: "I drink milk." },
+    { word: "water", phonetic: "/ˈwɔːtər/", translation: "水", example: "I drink water." },
+    { word: "juice", phonetic: "/dʒuːs/", translation: "果汁", example: "I like orange juice." },
+    { word: "rice", phonetic: "/raɪs/", translation: "米饭", example: "I eat rice." },
+    { word: "meat", phonetic: "/miːt/", translation: "肉", example: "I eat meat." },
+    { word: "ice cream", phonetic: "/ˈaɪs kriːm/", translation: "冰淇淋", example: "Ice cream is cold." },
+    { word: "pizza", phonetic: "/ˈpiːtsə/", translation: "披萨", example: "I love pizza." },
+    { word: "burger", phonetic: "/ˈbɜːrɡər/", translation: "汉堡", example: "I eat a burger." },
+    { word: "orange", phonetic: "/ˈɔːrɪndʒ/", translation: "橙子", example: "The orange is sweet." },
+    { word: "pear", phonetic: "/per/", translation: "梨", example: "I eat a pear." },
+    { word: "grape", phonetic: "/ɡreɪp/", translation: "葡萄", example: "Grapes are small." },
+    { word: "lemon", phonetic: "/ˈlemən/", translation: "柠檬", example: "The lemon is sour." },
+
+    // 衣服
+    { word: "shirt", phonetic: "/ʃɜːrt/", translation: "衬衫", example: "My shirt is blue." },
+    { word: "dress", phonetic: "/dres/", translation: "连衣裙", example: "She wears a dress." },
+    { word: "skirt", phonetic: "/skɜːrt/", translation: "裙子", example: "The skirt is pink." },
+    { word: "shoes", phonetic: "/ʃuːz/", translation: "鞋子", example: "My shoes are new." },
+    { word: "socks", phonetic: "/sɑːks/", translation: "袜子", example: "I wear socks." },
+    { word: "hat", phonetic: "/hæt/", translation: "帽子", example: "I have a hat." },
+    { word: "coat", phonetic: "/koʊt/", translation: "外套", example: "My coat is warm." },
+    { word: "pants", phonetic: "/pænts/", translation: "裤子", example: "I wear pants." },
+    { word: "jacket", phonetic: "/ˈdʒækɪt/", translation: "夹克", example: "My jacket is black." },
+
+    // 玩具与物品
+    { word: "toy", phonetic: "/tɔɪ/", translation: "玩具", example: "I have many toys." },
+    { word: "ball", phonetic: "/bɔːl/", translation: "球", example: "I play with a ball." },
+    { word: "doll", phonetic: "/dɑːl/", translation: "娃娃", example: "She has a doll." },
+    { word: "kite", phonetic: "/kaɪt/", translation: "风筝", example: "I fly a kite." },
+    { word: "bike", phonetic: "/baɪk/", translation: "自行车", example: "I ride a bike." },
+    { word: "car", phonetic: "/kɑːr/", translation: "汽车", example: "My car is red." },
+    { word: "book", phonetic: "/bʊk/", translation: "书", example: "I read a book." },
+    { word: "pen", phonetic: "/pen/", translation: "笔", example: "I write with a pen." },
+    { word: "pencil", phonetic: "/ˈpensl/", translation: "铅笔", example: "I draw with a pencil." },
+    { word: "bag", phonetic: "/bæɡ/", translation: "包", example: "My bag is heavy." },
+    { word: "box", phonetic: "/bɑːks/", translation: "盒子", example: "The box is big." },
+    { word: "table", phonetic: "/ˈteɪbl/", translation: "桌子", example: "The table is brown." },
+    { word: "chair", phonetic: "/tʃer/", translation: "椅子", example: "I sit on a chair." },
+    { word: "bed", phonetic: "/bed/", translation: "床", example: "I sleep on a bed." },
+    { word: "door", phonetic: "/dɔːr/", translation: "门", example: "Close the door." },
+    { word: "window", phonetic: "/ˈwɪndoʊ/", translation: "窗户", example: "Open the window." },
+    { word: "clock", phonetic: "/klɑːk/", translation: "钟", example: "The clock says ten." },
+    { word: "cup", phonetic: "/kʌp/", translation: "杯子", example: "I drink from a cup." },
+    { word: "plate", phonetic: "/pleɪt/", translation: "盘子", example: "The plate is clean." },
+    { word: "spoon", phonetic: "/spuːn/", translation: "勺子", example: "I eat with a spoon." },
+
+    // 地点
+    { word: "home", phonetic: "/hoʊm/", translation: "家", example: "I go home." },
+    { word: "school", phonetic: "/skuːl/", translation: "学校", example: "I go to school." },
+    { word: "park", phonetic: "/pɑːrk/", translation: "公园", example: "I play in the park." },
+    { word: "beach", phonetic: "/biːtʃ/", translation: "海滩", example: "We play on the beach." },
+    { word: "zoo", phonetic: "/zuː/", translation: "动物园", example: "I see animals at the zoo." },
+    { word: "shop", phonetic: "/ʃɑːp/", translation: "商店", example: "I buy things at the shop." },
+    { word: "garden", phonetic: "/ˈɡɑːrdn/", translation: "花园", example: "The garden is beautiful." },
+    { word: "room", phonetic: "/ruːm/", translation: "房间", example: "My room is clean." },
+    { word: "kitchen", phonetic: "/ˈkɪtʃɪn/", translation: "厨房", example: "Mom cooks in the kitchen." },
+    { word: "bathroom", phonetic: "/ˈbæθruːm/", translation: "浴室", example: "I wash in the bathroom." },
+
+    // 天气与自然
+    { word: "sun", phonetic: "/sʌn/", translation: "太阳", example: "The sun is bright." },
+    { word: "moon", phonetic: "/muːn/", translation: "月亮", example: "The moon is round." },
+    { word: "star", phonetic: "/stɑːr/", translation: "星星", example: "I see many stars." },
+    { word: "rain", phonetic: "/reɪn/", translation: "雨", example: "It is raining." },
+    { word: "cloud", phonetic: "/klaʊd/", translation: "云", example: "The cloud is white." },
+    { word: "wind", phonetic: "/wɪnd/", translation: "风", example: "The wind is strong." },
+    { word: "tree", phonetic: "/triː/", translation: "树", example: "The tree is tall." },
+    { word: "flower", phonetic: "/ˈflaʊər/", translation: "花", example: "The flower is pretty." },
+    { word: "grass", phonetic: "/ɡræs/", translation: "草", example: "The grass is green." },
+    { word: "sky", phonetic: "/skaɪ/", translation: "天空", example: "The sky is blue." },
+
+    // 形容词
+    { word: "big", phonetic: "/bɪɡ/", translation: "大的", example: "The elephant is big." },
+    { word: "small", phonetic: "/smɔːl/", translation: "小的", example: "The mouse is small." },
+    { word: "happy", phonetic: "/ˈhæpi/", translation: "开心的", example: "I am happy." },
+    { word: "sad", phonetic: "/sæd/", translation: "伤心的", example: "Don't be sad." },
+    { word: "good", phonetic: "/ɡʊd/", translation: "好的", example: "This is good." },
+    { word: "bad", phonetic: "/bæd/", translation: "坏的", example: "That is bad." },
+    { word: "hot", phonetic: "/hɑːt/", translation: "热的", example: "The sun is hot." },
+    { word: "cold", phonetic: "/koʊld/", translation: "冷的", example: "Ice is cold." },
+    { word: "new", phonetic: "/nuː/", translation: "新的", example: "I have new shoes." },
+    { word: "old", phonetic: "/oʊld/", translation: "旧的", example: "My book is old." },
+    { word: "long", phonetic: "/lɔːŋ/", translation: "长的", example: "The snake is long." },
+    { word: "short", phonetic: "/ʃɔːrt/", translation: "短的", example: "The pencil is short." },
+    { word: "tall", phonetic: "/tɔːl/", translation: "高的", example: "The tree is tall." },
+    { word: "fast", phonetic: "/fæst/", translation: "快的", example: "The car is fast." },
+    { word: "slow", phonetic: "/sloʊ/", translation: "慢的", example: "The turtle is slow." },
+    { word: "clean", phonetic: "/kliːn/", translation: "干净的", example: "My room is clean." },
+    { word: "dirty", phonetic: "/ˈdɜːrti/", translation: "脏的", example: "My shoes are dirty." },
+    { word: "beautiful", phonetic: "/ˈbjuːtɪfl/", translation: "美丽的", example: "The flower is beautiful." },
+    { word: "ugly", phonetic: "/ˈʌɡli/", translation: "丑的", example: "The monster is ugly." },
+    { word: "strong", phonetic: "/strɔːŋ/", translation: "强壮的", example: "The lion is strong." },
+    { word: "weak", phonetic: "/wiːk/", translation: "弱的", example: "The baby is weak." },
+    { word: "young", phonetic: "/jʌŋ/", translation: "年轻的", example: "I am young." },
+
+    // 动词
+    { word: "run", phonetic: "/rʌn/", translation: "跑", example: "I run fast." },
+    { word: "walk", phonetic: "/wɔːk/", translation: "走", example: "I walk to school." },
+    { word: "jump", phonetic: "/dʒʌmp/", translation: "跳", example: "I can jump high." },
+    { word: "swim", phonetic: "/swɪm/", translation: "游泳", example: "I swim in summer." },
+    { word: "eat", phonetic: "/iːt/", translation: "吃", example: "I eat an apple." },
+    { word: "drink", phonetic: "/drɪŋk/", translation: "喝", example: "I drink water." },
+    { word: "sleep", phonetic: "/sliːp/", translation: "睡觉", example: "I sleep at night." },
+    { word: "play", phonetic: "/pleɪ/", translation: "玩", example: "I play with toys." },
+    { word: "read", phonetic: "/riːd/", translation: "读", example: "I read books." },
+    { word: "write", phonetic: "/raɪt/", translation: "写", example: "I write my name." },
+    { word: "draw", phonetic: "/drɔː/", translation: "画", example: "I draw pictures." },
+    { word: "sing", phonetic: "/sɪŋ/", translation: "唱歌", example: "I sing songs." },
+    { word: "dance", phonetic: "/dæns/", translation: "跳舞", example: "I dance well." },
+    { word: "sit", phonetic: "/sɪt/", translation: "坐", example: "I sit on a chair." },
+    { word: "stand", phonetic: "/stænd/", translation: "站", example: "I stand up." },
+    { word: "look", phonetic: "/lʊk/", translation: "看", example: "Look at me!" },
+    { word: "listen", phonetic: "/ˈlɪsn/", translation: "听", example: "Listen to music." },
+    { word: "open", phonetic: "/ˈoʊpən/", translation: "打开", example: "Open the door." },
+    { word: "close", phonetic: "/kloʊz/", translation: "关闭", example: "Close the window." },
+    { word: "come", phonetic: "/kʌm/", translation: "来", example: "Come here!" },
+    { word: "go", phonetic: "/ɡoʊ/", translation: "去", example: "I go to school." },
+    { word: "see", phonetic: "/siː/", translation: "看见", example: "I see a bird." },
+    { word: "like", phonetic: "/laɪk/", translation: "喜欢", example: "I like cats." },
+    { word: "love", phonetic: "/lʌv/", translation: "爱", example: "I love my mom." },
+    { word: "want", phonetic: "/wɑːnt/", translation: "想要", example: "I want a toy." },
+    { word: "have", phonetic: "/hæv/", translation: "有", example: "I have a dog." },
+    { word: "make", phonetic: "/meɪk/", translation: "制作", example: "I make a cake." },
+    { word: "fly", phonetic: "/flaɪ/", translation: "飞", example: "Birds can fly." },
+    { word: "help", phonetic: "/help/", translation: "帮助", example: "I help my mom." },
+    { word: "wash", phonetic: "/wɑːʃ/", translation: "洗", example: "I wash my hands." },
+    { word: "cook", phonetic: "/kʊk/", translation: "做饭", example: "Mom cooks dinner." },
+
+    // 常用词
+    { word: "yes", phonetic: "/jes/", translation: "是", example: "Yes, I do." },
+    { word: "no", phonetic: "/noʊ/", translation: "不", example: "No, I don't." },
+    { word: "hello", phonetic: "/həˈloʊ/", translation: "你好", example: "Hello! How are you?" },
+    { word: "goodbye", phonetic: "/ɡʊdˈbaɪ/", translation: "再见", example: "Goodbye! See you!" },
+    { word: "please", phonetic: "/pliːz/", translation: "请", example: "Please help me." },
+    { word: "thank you", phonetic: "/θæŋk juː/", translation: "谢谢", example: "Thank you very much!" },
+    { word: "sorry", phonetic: "/ˈsɑːri/", translation: "对不起", example: "I am sorry." },
+    { word: "name", phonetic: "/neɪm/", translation: "名字", example: "My name is Tom." },
+    { word: "boy", phonetic: "/bɔɪ/", translation: "男孩", example: "The boy is tall." },
+    { word: "girl", phonetic: "/ɡɜːrl/", translation: "女孩", example: "The girl is pretty." },
+    { word: "man", phonetic: "/mæn/", translation: "男人", example: "The man is strong." },
+    { word: "woman", phonetic: "/ˈwʊmən/", translation: "女人", example: "The woman is kind." },
+    { word: "baby", phonetic: "/ˈbeɪbi/", translation: "婴儿", example: "The baby is cute." },
+    { word: "day", phonetic: "/deɪ/", translation: "天", example: "Have a good day!" },
+    { word: "night", phonetic: "/naɪt/", translation: "夜晚", example: "Good night!" },
+    { word: "morning", phonetic: "/ˈmɔːrnɪŋ/", translation: "早上", example: "Good morning!" },
+    { word: "afternoon", phonetic: "/ˌæftərˈnuːn/", translation: "下午", example: "Good afternoon!" },
+    { word: "time", phonetic: "/taɪm/", translation: "时间", example: "What time is it?" },
+    { word: "today", phonetic: "/təˈdeɪ/", translation: "今天", example: "Today is Monday." },
+    { word: "here", phonetic: "/hɪr/", translation: "这里", example: "Come here!" },
+    { word: "there", phonetic: "/ðer/", translation: "那里", example: "Go there!" },
+    { word: "this", phonetic: "/ðɪs/", translation: "这个", example: "This is my book." },
+    { word: "that", phonetic: "/ðæt/", translation: "那个", example: "That is your pen." },
+
+    // 交通工具
+    { word: "bus", phonetic: "/bʌs/", translation: "公交车", example: "I take the bus." },
+    { word: "train", phonetic: "/treɪn/", translation: "火车", example: "The train is fast." },
+    { word: "plane", phonetic: "/pleɪn/", translation: "飞机", example: "The plane flies high." },
+    { word: "boat", phonetic: "/boʊt/", translation: "船", example: "The boat is on water." },
+    { word: "taxi", phonetic: "/ˈtæksi/", translation: "出租车", example: "We take a taxi." },
+    { word: "truck", phonetic: "/trʌk/", translation: "卡车", example: "The truck is big." },
+
+    // 学校用品
+    { word: "ruler", phonetic: "/ˈruːlər/", translation: "尺子", example: "I use a ruler." },
+    { word: "eraser", phonetic: "/ɪˈreɪsər/", translation: "橡皮", example: "The eraser is white." },
+    { word: "crayon", phonetic: "/ˈkreɪɑːn/", translation: "蜡笔", example: "I draw with crayons." },
+    { word: "paper", phonetic: "/ˈpeɪpər/", translation: "纸", example: "I need paper." },
+    { word: "notebook", phonetic: "/ˈnoʊtbʊk/", translation: "笔记本", example: "My notebook is new." },
+    { word: "schoolbag", phonetic: "/ˈskuːlbæɡ/", translation: "书包", example: "My schoolbag is heavy." },
+    { word: "desk", phonetic: "/desk/", translation: "书桌", example: "I sit at my desk." },
+    { word: "classroom", phonetic: "/ˈklæsruːm/", translation: "教室", example: "Our classroom is big." },
+    { word: "teacher", phonetic: "/ˈtiːtʃər/", translation: "老师", example: "My teacher is nice." },
+    { word: "student", phonetic: "/ˈstuːdnt/", translation: "学生", example: "I am a student." },
+
+    // 职业
+    { word: "doctor", phonetic: "/ˈdɑːktər/", translation: "医生", example: "The doctor helps people." },
+    { word: "nurse", phonetic: "/nɜːrs/", translation: "护士", example: "The nurse is kind." },
+    { word: "farmer", phonetic: "/ˈfɑːrmər/", translation: "农民", example: "The farmer grows food." },
+    { word: "driver", phonetic: "/ˈdraɪvər/", translation: "司机", example: "My dad is a driver." },
+    { word: "cook", phonetic: "/kʊk/", translation: "厨师", example: "The cook makes food." },
+    { word: "policeman", phonetic: "/pəˈliːsmən/", translation: "警察", example: "The policeman helps us." },
+
+    // 运动
+    { word: "football", phonetic: "/ˈfʊtbɔːl/", translation: "足球", example: "I play football." },
+    { word: "basketball", phonetic: "/ˈbæskɪtbɔːl/", translation: "篮球", example: "I like basketball." },
+    { word: "tennis", phonetic: "/ˈtenɪs/", translation: "网球", example: "She plays tennis." },
+    { word: "badminton", phonetic: "/ˈbædmɪntən/", translation: "羽毛球", example: "We play badminton." },
+    { word: "run", phonetic: "/rʌn/", translation: "跑步", example: "I run every day." },
+
+    // 水果蔬菜
+    { word: "tomato", phonetic: "/təˈmeɪtoʊ/", translation: "西红柿", example: "The tomato is red." },
+    { word: "potato", phonetic: "/pəˈteɪtoʊ/", translation: "土豆", example: "I eat potatoes." },
+    { word: "carrot", phonetic: "/ˈkærət/", translation: "胡萝卜", example: "Rabbits eat carrots." },
+    { word: "onion", phonetic: "/ˈʌnjən/", translation: "洋葱", example: "Onions make me cry." },
+    { word: "cucumber", phonetic: "/ˈkjuːkʌmbər/", translation: "黄瓜", example: "The cucumber is green." },
+    { word: "watermelon", phonetic: "/ˈwɔːtərmelən/", translation: "西瓜", example: "Watermelon is sweet." },
+    { word: "strawberry", phonetic: "/ˈstrɔːberi/", translation: "草莓", example: "I love strawberries." },
+    { word: "cherry", phonetic: "/ˈtʃeri/", translation: "樱桃", example: "Cherries are small." },
+    { word: "peach", phonetic: "/piːtʃ/", translation: "桃子", example: "The peach is sweet." },
+
+    // 饮料和食物
+    { word: "tea", phonetic: "/tiː/", translation: "茶", example: "I drink tea." },
+    { word: "coffee", phonetic: "/ˈkɔːfi/", translation: "咖啡", example: "Dad drinks coffee." },
+    { word: "soup", phonetic: "/suːp/", translation: "汤", example: "The soup is hot." },
+    { word: "salad", phonetic: "/ˈsæləd/", translation: "沙拉", example: "I eat salad." },
+    { word: "sandwich", phonetic: "/ˈsænwɪtʃ/", translation: "三明治", example: "I make a sandwich." },
+    { word: "noodles", phonetic: "/ˈnuːdlz/", translation: "面条", example: "I love noodles." },
+    { word: "dumpling", phonetic: "/ˈdʌmplɪŋ/", translation: "饺子", example: "Dumplings are delicious." },
+    { word: "cookie", phonetic: "/ˈkʊki/", translation: "饼干", example: "I eat a cookie." },
+    { word: "candy", phonetic: "/ˈkændi/", translation: "糖果", example: "Candy is sweet." },
+    { word: "chocolate", phonetic: "/ˈtʃɑːklət/", translation: "巧克力", example: "I like chocolate." },
+
+    // 房间和家具
+    { word: "house", phonetic: "/haʊs/", translation: "房子", example: "My house is big." },
+    { word: "bedroom", phonetic: "/ˈbedruːm/", translation: "卧室", example: "I sleep in my bedroom." },
+    { word: "living room", phonetic: "/ˈlɪvɪŋ ruːm/", translation: "客厅", example: "We watch TV in the living room." },
+    { word: "sofa", phonetic: "/ˈsoʊfə/", translation: "沙发", example: "I sit on the sofa." },
+    { word: "TV", phonetic: "/ˌtiː ˈviː/", translation: "电视", example: "I watch TV." },
+    { word: "computer", phonetic: "/kəmˈpjuːtər/", translation: "电脑", example: "I use a computer." },
+    { word: "phone", phonetic: "/foʊn/", translation: "电话", example: "I have a phone." },
+    { word: "lamp", phonetic: "/læmp/", translation: "台灯", example: "The lamp is bright." },
+    { word: "picture", phonetic: "/ˈpɪktʃər/", translation: "图画", example: "I draw a picture." },
+    { word: "photo", phonetic: "/ˈfoʊtoʊ/", translation: "照片", example: "This is my photo." },
+    { word: "mirror", phonetic: "/ˈmɪrər/", translation: "镜子", example: "I look in the mirror." },
+    { word: "blanket", phonetic: "/ˈblæŋkɪt/", translation: "毯子", example: "The blanket is warm." },
+    { word: "pillow", phonetic: "/ˈpɪloʊ/", translation: "枕头", example: "My pillow is soft." },
+
+    // 更多动物
+    { word: "giraffe", phonetic: "/dʒəˈræf/", translation: "长颈鹿", example: "The giraffe has a long neck." },
+    { word: "zebra", phonetic: "/ˈziːbrə/", translation: "斑马", example: "The zebra is black and white." },
+    { word: "panda", phonetic: "/ˈpændə/", translation: "熊猫", example: "The panda eats bamboo." },
+    { word: "wolf", phonetic: "/wʊlf/", translation: "狼", example: "The wolf is wild." },
+    { word: "deer", phonetic: "/dɪr/", translation: "鹿", example: "The deer runs fast." },
+    { word: "goat", phonetic: "/ɡoʊt/", translation: "山羊", example: "The goat eats grass." },
+    { word: "penguin", phonetic: "/ˈpeŋɡwɪn/", translation: "企鹅", example: "Penguins live in cold places." },
+    { word: "dolphin", phonetic: "/ˈdɑːlfɪn/", translation: "海豚", example: "Dolphins are smart." },
+    { word: "shark", phonetic: "/ʃɑːrk/", translation: "鲨鱼", example: "Sharks live in the ocean." },
+    { word: "whale", phonetic: "/weɪl/", translation: "鲸鱼", example: "The whale is huge." },
+    { word: "bee", phonetic: "/biː/", translation: "蜜蜂", example: "Bees make honey." },
+    { word: "butterfly", phonetic: "/ˈbʌtərflaɪ/", translation: "蝴蝶", example: "The butterfly is beautiful." },
+    { word: "ant", phonetic: "/ænt/", translation: "蚂蚁", example: "Ants are small." },
+
+    // 季节和月份
+    { word: "spring", phonetic: "/sprɪŋ/", translation: "春天", example: "Flowers bloom in spring." },
+    { word: "summer", phonetic: "/ˈsʌmər/", translation: "夏天", example: "Summer is hot." },
+    { word: "autumn", phonetic: "/ˈɔːtəm/", translation: "秋天", example: "Leaves fall in autumn." },
+    { word: "winter", phonetic: "/ˈwɪntər/", translation: "冬天", example: "Winter is cold." },
+    { word: "Monday", phonetic: "/ˈmʌndeɪ/", translation: "星期一", example: "Today is Monday." },
+    { word: "Tuesday", phonetic: "/ˈtuːzdeɪ/", translation: "星期二", example: "Tomorrow is Tuesday." },
+    { word: "Wednesday", phonetic: "/ˈwenzdeɪ/", translation: "星期三", example: "Wednesday is midweek." },
+    { word: "Thursday", phonetic: "/ˈθɜːrzdeɪ/", translation: "星期四", example: "I like Thursday." },
+    { word: "Friday", phonetic: "/ˈfraɪdeɪ/", translation: "星期五", example: "Friday is fun." },
+    { word: "Saturday", phonetic: "/ˈsætərdeɪ/", translation: "星期六", example: "I play on Saturday." },
+    { word: "Sunday", phonetic: "/ˈsʌndeɪ/", translation: "星期日", example: "Sunday is a rest day." },
+
+    // 形状
+    { word: "circle", phonetic: "/ˈsɜːrkl/", translation: "圆形", example: "The ball is a circle." },
+    { word: "square", phonetic: "/skwer/", translation: "正方形", example: "The box is square." },
+    { word: "triangle", phonetic: "/ˈtraɪæŋɡl/", translation: "三角形", example: "I draw a triangle." },
+    { word: "rectangle", phonetic: "/ˈrektæŋɡl/", translation: "长方形", example: "The door is a rectangle." },
+    { word: "star", phonetic: "/stɑːr/", translation: "星形", example: "I draw a star." },
+    { word: "heart", phonetic: "/hɑːrt/", translation: "心形", example: "I love this heart." },
+
+    // 更多动作
+    { word: "cry", phonetic: "/kraɪ/", translation: "哭", example: "The baby cries." },
+    { word: "smile", phonetic: "/smaɪl/", translation: "微笑", example: "I smile at you." },
+    { word: "laugh", phonetic: "/læf/", translation: "笑", example: "We laugh together." },
+    { word: "talk", phonetic: "/tɔːk/", translation: "说话", example: "I talk to my friend." },
+    { word: "speak", phonetic: "/spiːk/", translation: "讲话", example: "I speak English." },
+    { word: "shout", phonetic: "/ʃaʊt/", translation: "喊叫", example: "Don't shout!" },
+    { word: "whisper", phonetic: "/ˈwɪspər/", translation: "低语", example: "I whisper a secret." },
+    { word: "call", phonetic: "/kɔːl/", translation: "叫", example: "I call my mom." },
+    { word: "answer", phonetic: "/ˈænsər/", translation: "回答", example: "I answer the question." },
+    { word: "ask", phonetic: "/æsk/", translation: "问", example: "I ask a question." },
+    { word: "study", phonetic: "/ˈstʌdi/", translation: "学习", example: "I study English." },
+    { word: "learn", phonetic: "/lɜːrn/", translation: "学习", example: "I learn new words." },
+    { word: "teach", phonetic: "/tiːtʃ/", translation: "教", example: "Teachers teach us." },
+    { word: "show", phonetic: "/ʃoʊ/", translation: "展示", example: "I show my toy." },
+    { word: "give", phonetic: "/ɡɪv/", translation: "给", example: "I give you a gift." },
+    { word: "take", phonetic: "/teɪk/", translation: "拿", example: "Take this book." },
+    { word: "bring", phonetic: "/brɪŋ/", translation: "带来", example: "Bring your bag." },
+    { word: "put", phonetic: "/pʊt/", translation: "放", example: "Put it here." },
+    { word: "get", phonetic: "/ɡet/", translation: "得到", example: "I get a present." },
+    { word: "buy", phonetic: "/baɪ/", translation: "买", example: "I buy a toy." },
+    { word: "sell", phonetic: "/sel/", translation: "卖", example: "They sell food." },
+    { word: "find", phonetic: "/faɪnd/", translation: "找到", example: "I find my ball." },
+    { word: "lose", phonetic: "/luːz/", translation: "丢失", example: "I lose my pen." },
+    { word: "wait", phonetic: "/weɪt/", translation: "等待", example: "Wait for me!" },
+    { word: "stop", phonetic: "/stɑːp/", translation: "停止", example: "Stop running!" },
+    { word: "start", phonetic: "/stɑːrt/", translation: "开始", example: "Let's start!" },
+    { word: "finish", phonetic: "/ˈfɪnɪʃ/", translation: "完成", example: "I finish my work." },
+    { word: "try", phonetic: "/traɪ/", translation: "尝试", example: "Try again!" },
+    { word: "catch", phonetic: "/kætʃ/", translation: "抓住", example: "Catch the ball!" },
+    { word: "throw", phonetic: "/θroʊ/", translation: "扔", example: "Throw the ball." },
+    { word: "kick", phonetic: "/kɪk/", translation: "踢", example: "Kick the ball." },
+    { word: "pull", phonetic: "/pʊl/", translation: "拉", example: "Pull the door." },
+    { word: "push", phonetic: "/pʊʃ/", translation: "推", example: "Push the button." },
+    { word: "climb", phonetic: "/klaɪm/", translation: "爬", example: "I climb the tree." },
+    { word: "carry", phonetic: "/ˈkæri/", translation: "搬运", example: "I carry my bag." },
+
+    // 更多形容词
+    { word: "nice", phonetic: "/naɪs/", translation: "好的", example: "She is nice." },
+    { word: "kind", phonetic: "/kaɪnd/", translation: "善良的", example: "My mom is kind." },
+    { word: "friendly", phonetic: "/ˈfrendli/", translation: "友好的", example: "He is friendly." },
+    { word: "smart", phonetic: "/smɑːrt/", translation: "聪明的", example: "You are smart." },
+    { word: "brave", phonetic: "/breɪv/", translation: "勇敢的", example: "The boy is brave." },
+    { word: "careful", phonetic: "/ˈkerfəl/", translation: "小心的", example: "Be careful!" },
+    { word: "tired", phonetic: "/ˈtaɪərd/", translation: "累的", example: "I am tired." },
+    { word: "hungry", phonetic: "/ˈhʌŋɡri/", translation: "饿的", example: "I am hungry." },
+    { word: "thirsty", phonetic: "/ˈθɜːrsti/", translation: "渴的", example: "I am thirsty." },
+    { word: "full", phonetic: "/fʊl/", translation: "饱的", example: "I am full." },
+    { word: "empty", phonetic: "/ˈempti/", translation: "空的", example: "The box is empty." },
+    { word: "busy", phonetic: "/ˈbɪzi/", translation: "忙的", example: "Mom is busy." },
+    { word: "free", phonetic: "/friː/", translation: "空闲的", example: "I am free today." },
+    { word: "ready", phonetic: "/ˈredi/", translation: "准备好的", example: "I am ready!" },
+    { word: "right", phonetic: "/raɪt/", translation: "正确的", example: "You are right." },
+    { word: "wrong", phonetic: "/rɔːŋ/", translation: "错误的", example: "That is wrong." },
+    { word: "easy", phonetic: "/ˈiːzi/", translation: "容易的", example: "This is easy." },
+    { word: "difficult", phonetic: "/ˈdɪfɪkəlt/", translation: "困难的", example: "This is difficult." },
+    { word: "interesting", phonetic: "/ˈɪntrəstɪŋ/", translation: "有趣的", example: "The book is interesting." },
+    { word: "boring", phonetic: "/ˈbɔːrɪŋ/", translation: "无聊的", example: "The movie is boring." },
+    { word: "fun", phonetic: "/fʌn/", translation: "有趣的", example: "This game is fun." },
+    { word: "safe", phonetic: "/seɪf/", translation: "安全的", example: "You are safe here." },
+    { word: "dangerous", phonetic: "/ˈdeɪndʒərəs/", translation: "危险的", example: "That is dangerous." },
+    { word: "quiet", phonetic: "/ˈkwaɪət/", translation: "安静的", example: "Be quiet!" },
+    { word: "loud", phonetic: "/laʊd/", translation: "吵闹的", example: "The music is loud." },
+    { word: "soft", phonetic: "/sɔːft/", translation: "柔软的", example: "The bed is soft." },
+    { word: "hard", phonetic: "/hɑːrd/", translation: "硬的", example: "The rock is hard." },
+    { word: "wet", phonetic: "/wet/", translation: "湿的", example: "My clothes are wet." },
+    { word: "dry", phonetic: "/draɪ/", translation: "干的", example: "The towel is dry." },
+    { word: "heavy", phonetic: "/ˈhevi/", translation: "重的", example: "The box is heavy." },
+    { word: "light", phonetic: "/laɪt/", translation: "轻的", example: "The bag is light." },
+    { word: "bright", phonetic: "/braɪt/", translation: "明亮的", example: "The sun is bright." },
+    { word: "dark", phonetic: "/dɑːrk/", translation: "黑暗的", example: "The room is dark." },
+
+    // 自然和环境
+    { word: "mountain", phonetic: "/ˈmaʊntn/", translation: "山", example: "The mountain is high." },
+    { word: "river", phonetic: "/ˈrɪvər/", translation: "河", example: "The river is long." },
+    { word: "lake", phonetic: "/leɪk/", translation: "湖", example: "The lake is beautiful." },
+    { word: "sea", phonetic: "/siː/", translation: "海", example: "I swim in the sea." },
+    { word: "ocean", phonetic: "/ˈoʊʃn/", translation: "海洋", example: "The ocean is big." },
+    { word: "island", phonetic: "/ˈaɪlənd/", translation: "岛", example: "The island is small." },
+    { word: "forest", phonetic: "/ˈfɔːrɪst/", translation: "森林", example: "Animals live in the forest." },
+    { word: "field", phonetic: "/fiːld/", translation: "田野", example: "The field is green." },
+    { word: "hill", phonetic: "/hɪl/", translation: "小山", example: "We climb the hill." },
+    { word: "stone", phonetic: "/stoʊn/", translation: "石头", example: "The stone is hard." },
+    { word: "sand", phonetic: "/sænd/", translation: "沙子", example: "I play with sand." },
+    { word: "fire", phonetic: "/ˈfaɪər/", translation: "火", example: "Fire is hot." },
+    { word: "ice", phonetic: "/aɪs/", translation: "冰", example: "Ice is cold." },
+    { word: "snow", phonetic: "/snoʊ/", translation: "雪", example: "I love snow." },
+
+    // 身体动作和感觉
+    { word: "feel", phonetic: "/fiːl/", translation: "感觉", example: "I feel happy." },
+    { word: "touch", phonetic: "/tʌtʃ/", translation: "触摸", example: "Touch the ball." },
+    { word: "smell", phonetic: "/smel/", translation: "闻", example: "I smell flowers." },
+    { word: "taste", phonetic: "/teɪst/", translation: "品尝", example: "I taste the cake." },
+    { word: "think", phonetic: "/θɪŋk/", translation: "思考", example: "I think so." },
+    { word: "know", phonetic: "/noʊ/", translation: "知道", example: "I know you." },
+    { word: "understand", phonetic: "/ˌʌndərˈstænd/", translation: "理解", example: "I understand." },
+    { word: "remember", phonetic: "/rɪˈmembər/", translation: "记得", example: "I remember you." },
+    { word: "forget", phonetic: "/fərˈɡet/", translation: "忘记", example: "Don't forget!" },
+
+    // 位置词
+    { word: "in", phonetic: "/ɪn/", translation: "在...里面", example: "The cat is in the box." },
+    { word: "on", phonetic: "/ɑːn/", translation: "在...上面", example: "The book is on the table." },
+    { word: "under", phonetic: "/ˈʌndər/", translation: "在...下面", example: "The dog is under the chair." },
+    { word: "behind", phonetic: "/bɪˈhaɪnd/", translation: "在...后面", example: "I am behind you." },
+    { word: "in front of", phonetic: "/ɪn frʌnt əv/", translation: "在...前面", example: "I stand in front of the door." },
+    { word: "next to", phonetic: "/nekst tuː/", translation: "在...旁边", example: "I sit next to you." },
+    { word: "near", phonetic: "/nɪr/", translation: "靠近", example: "The shop is near." },
+    { word: "far", phonetic: "/fɑːr/", translation: "远", example: "School is far." },
+    { word: "between", phonetic: "/bɪˈtwiːn/", translation: "在...之间", example: "I am between my friends." },
+    { word: "up", phonetic: "/ʌp/", translation: "向上", example: "Look up!" },
+    { word: "down", phonetic: "/daʊn/", translation: "向下", example: "Sit down!" },
+    { word: "left", phonetic: "/left/", translation: "左边", example: "Turn left." },
+    { word: "right", phonetic: "/raɪt/", translation: "右边", example: "Turn right." },
+
+    // 更多常用词
+    { word: "with", phonetic: "/wɪð/", translation: "和", example: "I play with you." },
+    { word: "for", phonetic: "/fɔːr/", translation: "为了", example: "This is for you." },
+    { word: "from", phonetic: "/frɑːm/", translation: "来自", example: "I am from China." },
+    { word: "to", phonetic: "/tuː/", translation: "到", example: "I go to school." },
+    { word: "and", phonetic: "/ænd/", translation: "和", example: "You and me." },
+    { word: "or", phonetic: "/ɔːr/", translation: "或者", example: "Red or blue?" },
+    { word: "but", phonetic: "/bʌt/", translation: "但是", example: "I like it, but it's expensive." },
+    { word: "very", phonetic: "/ˈveri/", translation: "非常", example: "Very good!" },
+    { word: "too", phonetic: "/tuː/", translation: "也", example: "Me too!" },
+    { word: "many", phonetic: "/ˈmeni/", translation: "许多", example: "Many people." },
+    { word: "much", phonetic: "/mʌtʃ/", translation: "许多", example: "Too much!" },
+    { word: "some", phonetic: "/sʌm/", translation: "一些", example: "I want some water." },
+    { word: "all", phonetic: "/ɔːl/", translation: "全部", example: "All the toys." },
+];
+
 // KET词库 - 剑桥英语初级证书完整词汇（1000个单词）
 const KET_WORDS = [
     // 家庭与人物
@@ -971,7 +1442,7 @@ const PET_WORDS = [
 ];
 
 // 全局变量
-let currentLevel = 'KET';
+let currentLevel = 'STARTERS';
 let currentWords = [...KET_WORDS];
 let currentIndex = 0;
 let learnedWords = new Set();
@@ -1206,7 +1677,7 @@ function loadProgress() {
     if (savedProgress) {
         try {
             const progress = JSON.parse(savedProgress);
-            currentLevel = progress.currentLevel || 'KET';
+            currentLevel = progress.currentLevel || 'STARTERS';
 
             // 加载当前词库的已学习单词
             if (progress.learnedWordsByLevel && progress.learnedWordsByLevel[currentLevel]) {
@@ -1248,7 +1719,13 @@ function loadProgress() {
             }
 
             // 更新词库
-            currentWords = currentLevel === 'KET' ? [...KET_WORDS] : [...PET_WORDS];
+            if (currentLevel === 'STARTERS') {
+                currentWords = [...STARTERS_WORDS];
+            } else if (currentLevel === 'KET') {
+                currentWords = [...KET_WORDS];
+            } else {
+                currentWords = [...PET_WORDS];
+            }
 
             // 更新词库按钮状态
             levelBtns.forEach(btn => {
@@ -1323,7 +1800,13 @@ function switchLevel(level) {
     saveProgress();
 
     currentLevel = level;
-    currentWords = level === 'KET' ? [...KET_WORDS] : [...PET_WORDS];
+    if (level === 'STARTERS') {
+        currentWords = [...STARTERS_WORDS];
+    } else if (level === 'KET') {
+        currentWords = [...KET_WORDS];
+    } else {
+        currentWords = [...PET_WORDS];
+    }
 
     // 加载新词库的数据
     const savedProgress = localStorage.getItem('vocabularyProgress');
@@ -1391,7 +1874,13 @@ function switchToLearnMode() {
     testContainer.classList.add('hidden');
 
     // 恢复原始词库
-    currentWords = currentLevel === 'KET' ? [...KET_WORDS] : [...PET_WORDS];
+    if (currentLevel === 'STARTERS') {
+        currentWords = [...STARTERS_WORDS];
+    } else if (currentLevel === 'KET') {
+        currentWords = [...KET_WORDS];
+    } else {
+        currentWords = [...PET_WORDS];
+    }
     currentIndex = 0;
     updateStats();
     showWord();
@@ -1408,7 +1897,13 @@ function switchToTestMode() {
     testContainer.classList.remove('hidden');
 
     // 恢复原始词库
-    currentWords = currentLevel === 'KET' ? [...KET_WORDS] : [...PET_WORDS];
+    if (currentLevel === 'STARTERS') {
+        currentWords = [...STARTERS_WORDS];
+    } else if (currentLevel === 'KET') {
+        currentWords = [...KET_WORDS];
+    } else {
+        currentWords = [...PET_WORDS];
+    }
     currentIndex = 0;
     updateStats();
     findNextUntested();
@@ -1430,7 +1925,14 @@ function switchToReviewMode() {
     testContainer.classList.remove('hidden');
 
     // 只显示错题本中的单词
-    const allWords = currentLevel === 'KET' ? KET_WORDS : PET_WORDS;
+    let allWords;
+    if (currentLevel === 'STARTERS') {
+        allWords = STARTERS_WORDS;
+    } else if (currentLevel === 'KET') {
+        allWords = KET_WORDS;
+    } else {
+        allWords = PET_WORDS;
+    }
     currentWords = allWords.filter(w => wrongWordsList.has(w.word));
     currentIndex = 0;
     updateStats();
