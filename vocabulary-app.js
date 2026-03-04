@@ -1606,7 +1606,20 @@ function showPreviousWord() {
 
 // 下一个单词
 function showNextWord() {
-    currentIndex = (currentIndex + 1) % currentWords.length;
+    if (!isTestMode && !isReviewMode) {
+        // 学习模式：跳过已学会的单词
+        let startIndex = currentIndex;
+        do {
+            currentIndex = (currentIndex + 1) % currentWords.length;
+        } while (
+            learnedWords.has(currentWords[currentIndex].word) &&
+            currentIndex !== startIndex
+        );
+    } else {
+        // 测试模式或复习模式：正常切换
+        currentIndex = (currentIndex + 1) % currentWords.length;
+    }
+
     saveProgress();
     if (isTestMode) {
         showTest();
