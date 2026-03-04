@@ -1881,7 +1881,18 @@ function switchToLearnMode() {
     } else {
         currentWords = [...PET_WORDS];
     }
+
+    // 跳过已学会的单词，定位到第一个未学会的
     currentIndex = 0;
+    while (currentIndex < currentWords.length && learnedWords.has(currentWords[currentIndex].word)) {
+        currentIndex++;
+    }
+
+    // 如果全部学完，从头开始
+    if (currentIndex >= currentWords.length) {
+        currentIndex = 0;
+    }
+
     updateStats();
     showWord();
 }
