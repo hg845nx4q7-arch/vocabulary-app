@@ -39,6 +39,7 @@ h1 {
     display: flex;
     gap: 10px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .level-btn {
@@ -594,27 +595,211 @@ footer {
     margin-top: 10px;
 }
 
-@media (max-width: 600px) {
+/* 平板横屏适配 */
+@media (max-width: 900px) and (min-width: 601px) {
     .container {
-        padding: 20px;
+        padding: 25px;
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 2.2em;
+    }
+
+    .level-btn, .reset-btn {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    .word {
+        font-size: 2.5em;
+    }
+
+    .letter-blank {
+        width: 45px;
+        height: 55px;
+        font-size: 28px;
+    }
+}
+
+/* 手机端适配 */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    /* 顶部按钮区域优化 */
+    .level-selector {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .level-btn, .reset-btn {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 120px;
+        padding: 10px 15px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    /* 统计区域优化 */
+    .stats {
+        flex-wrap: wrap;
+        padding: 15px 10px;
+        gap: 10px;
+    }
+
+    .stat-item {
+        flex: 1 1 30%;
+        min-width: 80px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    .coin-icon {
+        width: 30px;
+        height: 30px;
+        border: 2px solid #ff8c00;
+    }
+
+    .coin-icon::before {
+        font-size: 16px;
+    }
+
+    /* 进度条区域 */
+    .progress-container {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .progress-info {
+        font-size: 14px;
+    }
+
+    .progress-bar {
+        height: 25px;
+    }
+
+    /* 单词卡片区域 */
+    .card-container {
+        min-height: 280px;
+        margin: 20px 0;
+    }
+
+    .word-card {
+        padding: 25px 20px;
+        border-radius: 15px;
     }
 
     .word {
         font-size: 2em;
+        margin-bottom: 15px;
     }
 
-    .stats {
+    .phonetic {
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+
+    .translation {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+
+    .example {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+
+    .show-btn, .play-btn {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+
+    /* 行动按钮 */
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    /* 控制按钮 */
+    .controls {
+        margin: 20px 0;
+        gap: 10px;
+    }
+
+    .control-btn {
+        flex: 1;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    /* 模式选择器 */
+    .mode-selector {
         flex-wrap: wrap;
+        margin: 20px 0;
+        gap: 8px;
+    }
+
+    .mode-btn {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 120px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    /* 测试模式区域 */
+    .test-container {
+        margin: 20px 0;
+    }
+
+    .test-word h2 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+
+    .letter-blanks {
+        gap: 5px;
+        margin: 20px 0;
+        padding: 0 5px;
     }
 
     .letter-blank {
-        width: 40px;
-        height: 50px;
-        font-size: 24px;
+        width: 35px;
+        height: 45px;
+        font-size: 20px;
+        border-bottom: 3px solid #667eea;
+    }
+
+    .letter-blank.space {
+        width: 15px;
+    }
+
+    .spelling-input {
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px 0 10px 0;
     }
 
     .submit-btn {
@@ -623,12 +808,77 @@ footer {
         font-size: 16px;
     }
 
-    .spelling-input {
-        justify-content: center;
+    .input-hint {
+        font-size: 12px;
+        padding: 0 10px;
+        line-height: 1.4;
     }
 
-    .stat-item {
-        flex: 1 1 45%;
-        margin-bottom: 10px;
+    .test-result {
+        font-size: 1.1em;
+        padding: 15px;
+        margin-top: 15px;
+    }
+
+    /* 金币弹窗 */
+    .coin-popup {
+        padding: 20px 30px;
+        border-radius: 15px;
+    }
+
+    .coin-large {
+        width: 80px;
+        height: 80px;
+        border: 4px solid #ff8c00;
+    }
+
+    .coin-large::before {
+        font-size: 40px;
+    }
+
+    .coin-text {
+        font-size: 20px;
+        margin-top: 8px;
+    }
+
+    /* 页脚 */
+    footer {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+}
+
+/* 针对更小的屏幕 (320px - 375px) */
+@media (max-width: 375px) {
+    h1 {
+        font-size: 1.3em;
+    }
+
+    .level-btn, .reset-btn {
+        font-size: 13px;
+        padding: 8px 12px;
+        min-width: 100px;
+    }
+
+    .stat-value {
+        font-size: 18px;
+    }
+
+    .word {
+        font-size: 1.7em;
+    }
+
+    .test-word h2 {
+        font-size: 1.5em;
+    }
+
+    .letter-blank {
+        width: 30px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .letter-blank.space {
+        width: 12px;
     }
 }
